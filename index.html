@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="Leo Herzog">
+  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+
+  <title>☰ Lᴇᴏ Hᴇʀᴢᴏɢ</title>
+
+  <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script defer src="//pro.fontawesome.com/releases/v5.6.3/js/all.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
+  <link href="//fonts.googleapis.com/css?family=Acme|Lato:400,700" rel="stylesheet">
+  <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
+
+  <style>
+    html,
+    body,
+    #content {
+      width: 100vw;
+      height: 100vh;
+      margin: 0;
+      padding: 0;
+      background: black;
+      color: white;
+      overflow-x: hidden;
+    }
+
+    a,
+    a:visited {
+      color: white;
+      -o-transition: .25s;
+      -ms-transition: .25s;
+      -moz-transition: .25s;
+      -webkit-transition: .25s;
+      transition: .25s;
+    }
+
+    a:hover {
+      color: #AAA;
+    }
+
+    .badge {
+      font-size: 80%;
+      border-radius: 4px;
+    }
+
+    #content {
+      display: flex;
+      flex-direction: column;
+      text-align: center;
+    }
+
+    #name {
+      width: 100%;
+      margin-top: 30vh;
+      font-family: 'Acme', sans-serif;
+      font-size: 10vw;
+      font-variant: small-caps;
+      font-variant-alternates: normal;
+      font-variant-caps: small-caps;
+    }
+
+    #accounts {
+      width: 100%;
+      font-size: 4vw;
+      display: flex;
+      justify-content: center;
+      flex-wrap: wrap;
+    }
+
+    #posts {
+      margin-top: 10vh;
+      width: 100vw;
+    }
+
+    @media only screen and (max-width: 992px) {
+      #name {
+        font-size: 8em;
+        margin-top: 10vh;
+      }
+      #accounts {
+        font-size: 3em;
+      }
+    }
+
+    @media only screen and (max-width: 600px) {
+      #accounts {
+        flex-direction: column;
+      }
+    }
+  </style>
+
+  <script async src="https://www.googletagmanager.com/gtag/js?id=UA-18984545-2"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag() { dataLayer.push(arguments); }
+    gtag('js', new Date());
+
+    gtag('config', 'UA-18984545-2');
+  </script>
+
+</head>
+
+<body>
+
+  <div id="content">
+    <div id="name">Leo Herzog</div>
+    <div id="accounts"></div>
+    <div id="posts"></div>
+  </div>
+
+  <script>
+    $(document).ready(function() {
+      $.ajax({
+        "type": "GET",
+        "url": "https://script.google.com/macros/s/AKfycbz7zIpJquAvoEyJtB2VM782r_5v1vvd0eJ67qtEdgpDUXCQLoM/exec",
+        "dataType": "jsonp",
+        "traditional": true,
+        "cache": false,
+        success: function(info) {
+          if (info) {
+            console.log(info);
+            fillInAccountIcons(info.usernames);
+            fillInPosts(info.posts);
+          }
+        }
+      });
+    });
+
+    function fillInAccountIcons(accounts) {
+      $("#accounts").hide();
+      for (var i in accounts) {
+        var iconstring = '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw"></span></a></div>';
+        $("#accounts").append(iconstring);
+      }
+      $("#accounts").fadeIn();
+    }
+
+    function fillInPosts(posts) {
+      // TODO
+    }
+  </script>
+
+</body>
+
+</html>
