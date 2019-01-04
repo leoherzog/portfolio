@@ -15,39 +15,65 @@
   <script defer src="//pro.fontawesome.com/releases/v5.6.3/js/all.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
+  <script src="//cdnjs.cloudflare.com/ajax/libs/bricks.js/1.8.0/bricks.js"></script>
   <link href="//fonts.googleapis.com/css?family=Acme|Lato:400,700" rel="stylesheet">
   <link href="//cdnjs.cloudflare.com/ajax/libs/animate.css/3.7.0/animate.min.css" rel="stylesheet">
 
   <style>
     html,
     body,
+    p,
+    blockquote,
+    #content {
+      margin: 0;
+      padding: 0;
+      overflow-x: hidden;
+    }
+
+    html,
+    body,
     #content {
       width: 100vw;
       height: 100vh;
-      margin: 0;
-      padding: 0;
       background: black;
       color: white;
-      overflow-x: hidden;
+    }
+
+    blockquote {
+      margin-left: 8px;
+      padding-left: 8px;
+      border-left: #333 solid;
     }
 
     a,
     a:visited {
-      color: white;
+      color: #AAA;
       -o-transition: .25s;
       -ms-transition: .25s;
       -moz-transition: .25s;
       -webkit-transition: .25s;
       transition: .25s;
+      text-decoration: none;
     }
 
     a:hover {
-      color: #AAA;
+      color: #CCC;
+      text-decoration: underline;
+    }
+
+    #accounts a,
+    #accounts a:visited {
+      color: white;
+    }
+
+    .badge a {
+      color: inherit;
     }
 
     .badge {
       font-size: 80%;
       border-radius: 4px;
+      padding: 0 4px;
     }
 
     #content {
@@ -61,7 +87,6 @@
       margin-top: 30vh;
       font-family: 'Acme', sans-serif;
       font-size: 10vw;
-      
       font-variant: small-caps;
       font-variant-alternates: normal;
       font-variant-caps: small-caps;
@@ -77,15 +102,67 @@
     }
 
     #posts {
-      margin-top: 10vh;
-      width: 100vw;
+      margin: 10vh auto 0 auto;
+      width: 90vw;
     }
+
+    .card {
+      width: 20em;
+      background: #282828;
+      margin: 0 0.5vw 2vh 0.5vw;
+      color: white;
+      font-family: "Lato", sans-serif;
+      font-weight: 400;
+      border: 2px solid;
+      border-color: #555; /* overridden by post type */
+      border-radius: 8px;
+      text-align: left;
+    }
+
+    .card-header {
+      background: rgba(0, 0, 0, 0.1);
+      font-weight: 700;
+      padding: 12px 8px;
+      border-bottom: 1px #333 solid;
+      margin-bottom: 4px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-header-left {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+    }
+
+    .card-body {
+      padding: 12px 8px;
+      border-bottom: 1px #333 solid;
+    }
+
+    .card-footer {
+      padding: 12px 8px 8px 8px;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .card-footer-left,
+    .card-footer-right {
+      font-size: 80%;
+    }
+
+    .profilePhoto {
+      border-radius: 50%;
+      margin-right: 4px;
+    }
+
 
     @media only screen and (max-width: 992px) {
       #name {
         font-size: 5em;
         margin-top: 10vh;
       }
+
       #accounts {
         font-size: 3em;
         margin-top: 4vh;
@@ -102,8 +179,40 @@
       #name {
         font-size: 10em;
       }
+
       #accounts {
         font-size: 5em;
+      }
+    }
+
+    .breathe {
+      -webkit-animation: breathe 1.5s ease-out infinite normal;
+      animation: breathe 1.5s ease-out infinite normal;
+    }
+
+    @keyframes breathe {
+      0% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      25% {
+        -webkit-transform: scale(1);
+        -ms-transform: scale(1);
+        transform: scale(1);
+      }
+
+      60% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
+      }
+
+      100% {
+        -webkit-transform: scale(0.9);
+        -ms-transform: scale(0.9);
+        transform: scale(0.9);
       }
     }
   </style>
@@ -113,7 +222,6 @@
     window.dataLayer = window.dataLayer || [];
     function gtag() { dataLayer.push(arguments); }
     gtag('js', new Date());
-
     gtag('config', 'UA-18984545-2');
   </script>
 
@@ -123,8 +231,8 @@
 
   <div id="content">
     <div id="name">Leo Herzog</div>
-    <div id="accounts"></div>
-    <div id="posts"></div>
+    <div id="accounts"><span class="far fa-at breathe"></span></div>
+    <div id="posts" style="display:none;"></div>
   </div>
 
   <script>
@@ -146,16 +254,57 @@
     });
 
     function fillInAccountIcons(accounts) {
-      $("#accounts").hide();
+      var iconString = "";
       for (var i in accounts) {
-        var iconstring = '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw"></span></a></div>';
-        $("#accounts").append(iconstring);
+        iconString += '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw"></span></a></div>';
       }
-      $("#accounts").fadeIn();
+      $("#accounts").html(iconString).fadeIn();
     }
 
     function fillInPosts(posts) {
-      // TODO
+
+      var postsString = "";
+      for (var i in posts) {
+        postsString += '<div class="card" style="border-color:' + posts[i].color + '">';
+        postsString += '<div class="card-header">';
+        postsString += '<div class="card-header-left">';
+        if (posts[i].profilePhotoUrl) {
+          postsString += '<img class="profilePhoto" src="' + posts[i].profilePhotoUrl + '" width="24px" /> ';
+        }
+        postsString += '<a href="' + posts[i].profileUrl + '" target="_blank">' + posts[i].username + '</a>';
+        postsString += '</div>';
+        postsString += '<div class="card-header-right"><span class="' + posts[i].icon + ' fa-fw"></span></div>';
+        postsString += '</div>';
+        postsString += '<div class="card-body">' + posts[i].text + '</div>';
+        postsString += '<div class="card-footer">';
+        postsString += '<div class="card-footer-left"><span class="far fa-' + posts[i].type + ' fa-fw"></span> <a href="' + posts[i].url + '" target="_blank">' + moment(posts[i].date, "x").fromNow() + '</a></div>';
+        postsString += '<div class="card-footer-right"></div>';
+        postsString += '</div>';
+        postsString += '</div>';
+      }
+
+      var masonry = Bricks({
+        "container": "#posts",
+        "packed": "data-packed",
+        "position": false,
+        "sizes": [
+            { columns: 1, gutter: 25 },
+            { mq: '770px', columns: 2, gutter: 25 },
+            { mq: '1160px', columns: 3, gutter: 25 },
+            { mq: '1550px', columns: 4, gutter: 40 }
+          ]
+        });
+
+        $(window).on('resize', masonry.pack);
+
+        $("#posts").html(postsString).slideDown();
+        
+        masonry.pack();
+
+        setInterval(function() {
+          masonry.pack();
+        }, 1000);
+
     }
   </script>
 
