@@ -94,7 +94,7 @@
 
     #accounts {
       width: 100%;
-      margin-top: 2vh;
+      margin: 2vh auto 0 auto;
       font-size: 4vw;
       display: flex;
       justify-content: center;
@@ -157,7 +157,7 @@
     }
 
 
-    @media only screen and (max-width: 992px) {
+    @media (max-width: 992px) {
       #name {
         font-size: 5em;
         margin-top: 10vh;
@@ -169,13 +169,13 @@
       }
     }
 
-    @media only screen and (max-width: 600px) {
+    @media (max-width: 600px) {
       #name {
         line-height: 75%;
       }
     }
 
-    @media only screen and (min-width: 1500px) {
+    @media (min-width: 1500px) {
       #name {
         font-size: 10em;
       }
@@ -288,22 +288,22 @@
         "packed": "data-packed",
         "position": false,
         "sizes": [
-            { columns: 1, gutter: 25 },
-            { mq: '770px', columns: 2, gutter: 25 },
-            { mq: '1160px', columns: 3, gutter: 25 },
-            { mq: '1550px', columns: 4, gutter: 40 }
-          ]
-        });
+          { columns: 1, gutter: 25 },
+          { mq: '770px', columns: 2, gutter: 25 },
+          { mq: '1160px', columns: 3, gutter: 25 },
+          { mq: '1550px', columns: 4, gutter: 40 }
+        ]
+      });
 
-        $(window).on('resize', masonry.pack);
+      $(window).on('resize', masonry.pack);
 
-        $("#posts").html(postsString).slideDown();
-        
+      $("#posts").html(postsString).slideDown();
+
+      masonry.pack();
+
+      setInterval(function() {
         masonry.pack();
-
-        setInterval(function() {
-          masonry.pack();
-        }, 1000);
+      }, 1000);
 
     }
   </script>
