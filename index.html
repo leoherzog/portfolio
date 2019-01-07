@@ -114,7 +114,8 @@
       font-family: "Lato", sans-serif;
       font-weight: 400;
       border: 2px solid;
-      border-color: #555; /* overridden by post type */
+      border-color: #555;
+      /* overridden by post type */
       border-radius: 8px;
       text-align: left;
     }
@@ -155,7 +156,6 @@
       border-radius: 50%;
       margin-right: 4px;
     }
-
 
     @media (max-width: 992px) {
       #name {
@@ -256,7 +256,7 @@
     function fillInAccountIcons(accounts) {
       var iconString = "";
       for (var i in accounts) {
-        iconString += '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw"></span></a></div>';
+        iconString += '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw" title="' + accounts[i].url + '"></span></a></div>';
       }
       $("#accounts").html(iconString).fadeIn();
     }
