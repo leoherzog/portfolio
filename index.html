@@ -139,6 +139,7 @@
     .card-body {
       padding: 12px 8px;
       border-bottom: 1px #333 solid;
+      overflow-wrap: break-word;
     }
 
     .card-footer {
@@ -269,7 +270,7 @@
         postsString += '<div class="card-header">';
         postsString += '<div class="card-header-left">';
         if (posts[i].profilePhotoUrl) {
-          postsString += '<img class="profilePhoto" src="' + posts[i].profilePhotoUrl + '" width="24px" /> ';
+          postsString += '<img class="profilePhoto" src="' + posts[i].profilePhotoUrl + '" width="24px" alt="' + posts[i].service + ' profile photo" /> ';
         }
         postsString += '<a href="' + posts[i].profileUrl + '" target="_blank">' + posts[i].username + '</a>';
         postsString += '</div>';
