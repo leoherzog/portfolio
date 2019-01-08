@@ -66,6 +66,14 @@
       color: white;
     }
 
+    #accounts a .fa-inverse {
+      color: black;
+    }
+
+    .fa-stack {
+      display: inline-block;
+    }
+
     .badge a {
       color: inherit;
     }
@@ -99,6 +107,11 @@
       display: flex;
       justify-content: center;
       flex-wrap: wrap;
+    }
+
+    .fa-stack {
+      margin-top: 2px;
+      font-size: 2vw !important;
     }
 
     #posts {
@@ -168,6 +181,10 @@
         font-size: 3em;
         margin-top: 4vh;
       }
+
+      .fa-stack {
+        font-size: .5em !important;
+      }
     }
 
     @media (max-width: 600px) {
@@ -183,6 +200,10 @@
 
       #accounts {
         font-size: 5em;
+      }
+
+      .fa-stack {
+        font-size: .5em !important;
       }
     }
 
@@ -257,7 +278,7 @@
     function fillInAccountIcons(accounts) {
       var iconString = "";
       for (var i in accounts) {
-        iconString += '<div><a href="' + accounts[i].url + '" target="_blank"><span class="' + accounts[i].icon + ' fa-fw" title="' + accounts[i].url + '"></span></a></div>';
+        iconString += '<div><a href="' + accounts[i].url + '" target="_blank" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
       }
       $("#accounts").html(iconString).fadeIn();
     }
@@ -274,7 +295,7 @@
         }
         postsString += '<a href="' + posts[i].profileUrl + '" target="_blank">' + posts[i].username + '</a>';
         postsString += '</div>';
-        postsString += '<div class="card-header-right"><span class="' + posts[i].icon + ' fa-fw"></span></div>';
+        postsString += '<div class="card-header-right">' + posts[i].simpleIcon + '</div>';
         postsString += '</div>';
         postsString += '<div class="card-body">' + posts[i].text + '</div>';
         postsString += '<div class="card-footer">';
