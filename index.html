@@ -24,7 +24,8 @@
     body,
     p,
     blockquote,
-    #content {
+    #content,
+    .fa-stack {
       margin: 0;
       padding: 0;
       overflow-x: hidden;
@@ -64,14 +65,15 @@
     #accounts a,
     #accounts a:visited {
       color: white;
+      text-decoration: none;
+    }
+
+    #accounts a:hover {
+      color: #CCC;
     }
 
     #accounts a .fa-inverse {
       color: black;
-    }
-
-    .fa-stack {
-      display: inline-block;
     }
 
     .badge a {
@@ -110,8 +112,8 @@
     }
 
     .fa-stack {
-      margin-top: 2px;
       font-size: 2vw !important;
+      margin-top: 0.15em;
     }
 
     #posts {
@@ -184,6 +186,7 @@
 
       .fa-stack {
         font-size: .5em !important;
+        margin-top: 0.15em;
       }
     }
 
@@ -204,6 +207,7 @@
 
       .fa-stack {
         font-size: .5em !important;
+        margin-top: 0.15em;
       }
     }
 
