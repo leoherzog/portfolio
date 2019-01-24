@@ -262,21 +262,19 @@
   </div>
 
   <script>
-    $(document).ready(function() {
-      $.ajax({
-        "type": "GET",
-        "url": "https://script.google.com/macros/s/AKfycbz7zIpJquAvoEyJtB2VM782r_5v1vvd0eJ67qtEdgpDUXCQLoM/exec",
-        "dataType": "jsonp",
-        "traditional": true,
-        "cache": false,
-        success: function(info) {
-          if (info) {
-            console.log(info);
-            fillInAccountIcons(info.usernames);
-            fillInPosts(info.posts);
-          }
+    $.ajax({
+      "type": "GET",
+      "url": "https://script.google.com/macros/s/AKfycbz7zIpJquAvoEyJtB2VM782r_5v1vvd0eJ67qtEdgpDUXCQLoM/exec",
+      "dataType": "jsonp",
+      "traditional": true,
+      "cache": false,
+      success: function(info) {
+        if (info) {
+          console.log(info);
+          fillInAccountIcons(info.usernames);
+          fillInPosts(info.posts);
         }
-      });
+      }
     });
 
     function fillInAccountIcons(accounts) {
