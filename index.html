@@ -80,9 +80,11 @@
     }
 
     .badge {
+      display: inline-block;
       font-size: 80%;
       border-radius: 4px;
-      padding: 0 4px;
+      padding: 2px 4px;
+      margin: 0 0 4px 0;
     }
 
     #content {
@@ -289,7 +291,7 @@
       "cache": false,
       success: function(info) {
         if (info) {
-          //console.log(info.usernames.Mixer.username);
+          //console.log(info);
           fillInAccountIcons(info.usernames);
           fillInPosts(info.posts);
           checkIfStreaming(info.usernames.Mixer.username);
