@@ -12,7 +12,7 @@
   <title>☰ Lᴇᴏ Hᴇʀᴢᴏɢ</title>
 
   <script src="//cdnjs.cloudflare.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
-  <script defer src="//pro.fontawesome.com/releases/v5.6.3/js/all.js"></script>
+  <script defer src="//pro.fontawesome.com/releases/v5.7.0/js/all.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment.js/2.23.0/moment.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/moment-timezone/0.5.23/moment-timezone-with-data-2012-2022.min.js"></script>
   <script src="//cdnjs.cloudflare.com/ajax/libs/bricks.js/1.8.0/bricks.js"></script>
@@ -112,12 +112,28 @@
 
     .fa-stack {
       font-size: .5em !important;
-      margin-top: 0.15em;
+      margin-top: 0.15em !important;
+    }
+
+    #stream {
+      margin: 5vh auto 0 auto;
+      padding: 0;
+      /* display: none; */
+    }
+
+    #mixer-embed,
+    #twitch-embed {
+      width: 48vw; /* 16 */
+      height: 27vw; /* 9 */
+      border: 0;
+      overflow: hidden;
+      /* display: none; */
     }
 
     #posts {
-      margin: 10vh auto 0 auto;
+      margin: 8vh auto 0 auto;
       width: 90vw;
+      /* display: none; */
     }
 
     .card {
@@ -258,7 +274,12 @@
   <div id="content">
     <div id="name">Leo Herzog</div>
     <div id="accounts"><span class="far fa-at breathe"></span></div>
-    <div id="posts" style="display:none;"></div>
+    <div id="stream">
+      <!-- <iframe id="twitch-embed" allowfullscreen></iframe> -->
+      <!-- <iframe id="twitch-embed" src="https://player.twitch.tv/?channel=xd1936" allowfullscreen></iframe> -->
+      <iframe id="mixer-embed" allowfullscreen></iframe>
+    </div>
+    <div id="posts"></div>
   </div>
 
   <script>
@@ -270,9 +291,11 @@
       "cache": false,
       success: function(info) {
         if (info) {
-          console.log(info);
+          //console.log(info.usernames.Mixer.username);
           fillInAccountIcons(info.usernames);
           fillInPosts(info.posts);
+          checkIfStreaming(info.usernames.Mixer.username);
+          setInterval(function() {checkIfStreaming(info.usernames.Mixer.username)}, 15000);
         }
       }
     });
@@ -280,7 +303,8 @@
     function fillInAccountIcons(accounts) {
       var iconString = "";
       for (var i in accounts) {
-        iconString += '<div><a href="' + accounts[i].url + '" target="_blank" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
+        var id = i.toString().toLowerCase().replace(/\s+/g, "-");
+        iconString += '<div id="' + id + '"><a href="' + accounts[i].url + '" target="_blank" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
       }
       $("#accounts").html(iconString).fadeIn();
     }
@@ -329,6 +353,28 @@
         masonry.pack();
       }, 1000);
 
+    }
+
+    function checkIfStreaming(mixerUsername) {
+      $.ajax({
+        "type": "GET",
+        "url": "https://mixer.com/api/v1/channels/" + mixerUsername,
+        "dataType": "json",
+        "cache": false,
+        success: function(mixer) {
+          if (mixer.online) {
+            console.log("Stream is online...");
+            if ($('#mixer-embed').attr('src') != 'https://mixer.com/embed/player/' + mixer.user.username) {
+              $('#mixer-embed').attr('src', 'https://mixer.com/embed/player/' + mixer.user.username);
+            }
+            $('#stream').show();
+          } else {
+            console.log("Stream is offline...");
+            $('#mixer-embed').attr('src', '');
+            $('#stream').hide();
+          }
+        }
+      });
     }
   </script>
 
