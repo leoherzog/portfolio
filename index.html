@@ -364,7 +364,7 @@
         success: function(mixer) {
           if (mixer.online) {
             console.log("Stream is online...");
-            if ($('#mixer-embed').attr('src') != 'https://mixer.com/embed/player/' + mixer.user.username) {
+            if (!$('#mixer-embed').attr('src')) {
               $('#mixer-embed').attr('src', 'https://mixer.com/embed/player/' + mixer.user.username);
             }
             $('#stream').show();
