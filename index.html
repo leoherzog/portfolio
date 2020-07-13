@@ -120,7 +120,6 @@
       display: none;
     }
 
-    #mixer-embed,
     #twitch-embed {
       width: 48vw; /* 16 */
       height: 27vw; /* 9 */
@@ -264,7 +263,6 @@
     <div id="stream">
       <!-- <iframe id="twitch-embed" allowfullscreen></iframe> -->
       <!-- <iframe id="twitch-embed" src="https://player.twitch.tv/?channel=xd1936" allowfullscreen></iframe> -->
-      <iframe id="mixer-embed" allowfullscreen></iframe>
     </div>
     <div id="posts"></div>
   </div>
@@ -281,8 +279,6 @@
           //console.log(info);
           fillInAccountIcons(info.usernames);
           fillInPosts(info.posts);
-          checkIfStreaming(info.usernames.Mixer.username);
-          setInterval(function() {checkIfStreaming(info.usernames.Mixer.username)}, 15000);
         }
       }
     });
@@ -340,28 +336,6 @@
         masonry.pack();
       }, 1000);
 
-    }
-
-    function checkIfStreaming(mixerUsername) {
-      $.ajax({
-        "type": "GET",
-        "url": "https://mixer.com/api/v1/channels/" + mixerUsername,
-        "dataType": "json",
-        "cache": false,
-        success: function(mixer) {
-          if (mixer.online) {
-            console.log("Stream is online...");
-            if (!$('#mixer-embed').attr('src')) {
-              $('#mixer-embed').attr('src', 'https://mixer.com/embed/player/' + mixer.user.username);
-            }
-            $('#stream').show();
-          } else {
-            console.log("Stream is offline...");
-            $('#mixer-embed').attr('src', '');
-            $('#stream').hide();
-          }
-        }
-      });
     }
   </script>
 
