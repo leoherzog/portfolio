@@ -285,9 +285,9 @@
 
     function fillInAccountIcons(accounts) {
       var iconString = "";
-      for (var i in accounts) {
+      for (var account of accounts) {
         var id = i.toString().toLowerCase().replace(/\s+/g, "-");
-        iconString += '<div id="' + id + '"><a href="' + accounts[i].url + '" target="_blank" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
+        iconString += '<div id="' + id + '"><a href="' + account.url + '" target="_blank" title="' + account.url + '">' + account.icon + '</a></div>';
       }
       $("#accounts").html(iconString).fadeIn();
     }
@@ -295,20 +295,20 @@
     function fillInPosts(posts) {
 
       var postsString = "";
-      for (var i in posts) {
-        postsString += '<div class="card" style="border-color:' + posts[i].color + '">';
+      for (var post of posts) {
+        postsString += '<div class="card" style="border-color:' + post.color + '">';
         postsString += '<div class="card-header">';
         postsString += '<div class="card-header-left">';
-        if (posts[i].profilePhotoUrl) {
-          postsString += '<img class="profilePhoto" src="' + posts[i].profilePhotoUrl + '" width="24px" alt="' + posts[i].service + ' profile photo" /> ';
+        if (post.profilePhotoUrl) {
+          postsString += '<img class="profilePhoto" src="' + post.profilePhotoUrl + '" width="24px" alt="' + post.service + ' profile photo" /> ';
         }
-        postsString += '<a href="' + posts[i].profileUrl + '" target="_blank">' + posts[i].username + '</a>';
+        postsString += '<a href="' + post.profileUrl + '" target="_blank">' + post.username + '</a>';
         postsString += '</div>';
-        postsString += '<div class="card-header-right">' + posts[i].simpleIcon + '</div>';
+        postsString += '<div class="card-header-right">' + post.simpleIcon + '</div>';
         postsString += '</div>';
-        postsString += '<div class="card-body">' + posts[i].text + '</div>';
+        postsString += '<div class="card-body">' + post.text + '</div>';
         postsString += '<div class="card-footer">';
-        postsString += '<div class="card-footer-left"><span class="far fa-' + posts[i].type + ' fa-fw"></span> <a href="' + posts[i].url + '" target="_blank">' + timeago.format(posts[i].date) + '</a></div>';
+        postsString += '<div class="card-footer-left"><span class="far fa-' + post.type + ' fa-fw"></span> <a href="' + post.url + '" target="_blank">' + timeago.format(post.date) + '</a></div>';
         postsString += '<div class="card-footer-right"></div>';
         postsString += '</div>';
         postsString += '</div>';
