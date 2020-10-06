@@ -284,18 +284,18 @@
     });
 
     function fillInAccountIcons(accounts) {
-      var iconString = "";
-      for (var account of accounts) {
-        var id = i.toString().toLowerCase().replace(/\s+/g, "-");
-        iconString += '<div id="' + id + '"><a href="' + account.url + '" target="_blank" title="' + account.url + '">' + account.icon + '</a></div>';
+      let iconString = "";
+      for (let i in accounts) {
+        let id = i.toString().toLowerCase().replace(/\s+/g, "-");
+        iconString += '<div id="' + id + '"><a href="' + accounts[i].url + '" target="_blank" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
       }
       $("#accounts").html(iconString).fadeIn();
     }
 
     function fillInPosts(posts) {
 
-      var postsString = "";
-      for (var post of posts) {
+      let postsString = "";
+      for (let post of posts) {
         postsString += '<div class="card" style="border-color:' + post.color + '">';
         postsString += '<div class="card-header">';
         postsString += '<div class="card-header-left">';
