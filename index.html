@@ -246,7 +246,7 @@
     function fillInAccountIcons(accounts) {
       let iconString = "";
       for (let i in accounts) {
-        iconString += '<div id="' + i.toString().toLowerCase().replace(/\s+/g, '-') + '"><a href="' + accounts[i].url + '" target="_blank" rel="me" title="' + accounts[i].url + '">' + accounts[i].icon + '</a></div>';
+        iconString += '<div id="' + i.toString().toLowerCase().replace(/\s+/g, '-') + '"><a href="' + accounts[i].url + '" target="_blank" rel="me" title="' + accounts[i].username + ' on ' + i + '">' + accounts[i].icon + '</a></div>';
       }
       let e = document.getElementById('accounts');
       e.innerHTML = iconString;
