@@ -14,6 +14,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/timeago.js@4/dist/timeago.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bricks.js@1/dist/bricks.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/marked@9/lib/marked.umd.min.js"></script>
   <script defer async src="https://kit.fontawesome.com/ca0b990bbd.js"></script>
   <link href="https://fonts.googleapis.com/css?family=Acme|Lato:400,700" rel="stylesheet">
 
@@ -129,6 +130,16 @@
       overflow: hidden;
     }
 
+    #intro {
+      display: none;
+      width: 50vw;
+      margin: 7.5vh auto 0 auto;
+    }
+
+    #introcontent {
+      padding: 0px 8px 12px;
+    }
+
     #posts {
       margin: 7.5vh auto 0 auto;
       width: 90vw;
@@ -149,7 +160,6 @@
       /* overridden by post type */
       border-radius: 8px;
       text-align: left;
-      overflow: hidden;
     }
 
     .card-header {
@@ -228,6 +238,17 @@
   <div id="content">
     <div id="name">Leo Herzog</div>
     <div id="accounts"><span class="fa-regular fa-at fa-2x fa-beat-fade"></span></div>
+    <div id="intro" class="card">
+      <div class="card-header">
+        <div class="card-header-left">
+          <a href="https://github.com/leoherzog" target="_blank">leoherzog/README.md</a>
+        </div>
+        <div class="card-header-right">
+          <span class="fa-brands fa-github fa-fw"></span>
+        </div>
+      </div>
+      <div id="introcontent" class="card-body"></div>
+    </div>
     <div id="stream">
       <!-- <iframe id="twitch-embed" allowfullscreen></iframe> -->
       <!-- <iframe id="twitch-embed" src="https://player.twitch.tv/?channel=xd1936" allowfullscreen></iframe> -->
@@ -305,6 +326,13 @@
     }
   </script>
   <script src="https://script.google.com/macros/s/AKfycbw3NQzIOVwU36GeDSlemT80h2lY2MRteejpUSDlg3waa7NPny4/exec?callback=load"></script>
+  <script>
+    document.addEventListener('DOMContentLoaded', async function() {
+      let intro = await fetch('https://raw.githubusercontent.com/leoherzog/leoherzog/main/README.md').then(response => response.text());
+      document.getElementById('introcontent').innerHTML = marked.parse(intro);
+      document.getElementById('intro').style.display = 'block';
+    })
+  </script>
 
 </body>
 
