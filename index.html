@@ -216,6 +216,9 @@
       #name {
         line-height: 75%;
       }
+      #intro {
+        width: 75vw;
+      }
     }
 
     @media (min-width: 1500px) {
@@ -331,7 +334,7 @@
       let intro = await fetch('https://raw.githubusercontent.com/leoherzog/leoherzog/main/README.md').then(response => response.text());
       document.getElementById('introcontent').innerHTML = marked.parse(intro);
       document.getElementById('intro').style.display = 'block';
-    })
+    });
   </script>
 
 </body>
