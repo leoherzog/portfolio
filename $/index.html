@@ -50,12 +50,23 @@
         text-decoration: none;
       }
 
-      section > a {
+      section > * {
         display: flex;
         flex-direction: column;
         justify-content: center;
         align-items: center;
         text-align: center;
+      }
+
+      input {
+        width: fit-content;
+        margin: 8px 4px;
+        font-family: ui-monospace, 'Cascadia Code', 'Source Code Pro', Menlo, Consolas, 'DejaVu Sans Mono', monospace;
+        font-weight: normal;
+      }
+
+      #copybtc {
+        cursor: pointer;
       }
 
       .icon {
@@ -124,6 +135,32 @@
           <h2>Venmo</h2>
         </a>
       </section>
+
+      <section>
+        <div>
+          <svg class="icon" width="64" height="64" version="1.1" viewBox="0 0 64 64" xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="m64 32c0 17.677-14.323 32-32 32s-32-14.323-32-32 14.323-32 32-32 32 14.323 32 32zm-18.284-4.5548c0.63226-4.2581-2.6065-6.5419-7.0452-8.0774l1.4323-5.7677-3.5097-0.87742-1.4065 5.6129c-0.92903-0.23226-1.871-0.45161-2.8129-0.65806l1.4065-5.6516-3.5097-0.87742-1.4452 5.7677c-0.76129-0.16774-1.5097-0.34839-2.2452-0.52903v-0.0129l-4.8387-1.2129-0.92903 3.7548s2.6065 0.59355 2.5548 0.63226c1.4194 0.36129 1.6774 1.2903 1.6387 2.0387l-1.6387 6.5677c0.10323 0.02581 0.21936 0.06452 0.36129 0.11613-0.11613-0.02581-0.24516-0.06452-0.37419-0.09032l-2.2968 9.2c-0.16774 0.42581-0.61936 1.0839-1.6129 0.83871 0.03871 0.05161-2.5548-0.63226-2.5548-0.63226l-1.7419 4.0129 4.5677 1.1355c0.85161 0.21936 1.6774 0.43871 2.5032 0.64516l-1.4581 5.8323 3.5097 0.87742 1.4452-5.7677a133.96 133.96 0 0 0 2.8 0.72258l-1.4323 5.7419 3.5097 0.87742 1.4581-5.8194c5.9871 1.1355 10.49 0.67097 12.387-4.7355 1.5226-4.3613-0.07742-6.8774-3.2258-8.5161 2.2968-0.52903 4.0258-2.0387 4.4774-5.1484zm-8.0258 11.252c-1.0839 4.3613-8.4258 2-10.813 1.4065l1.9226-7.729c2.3742 0.59355 10.013 1.7677 8.8774 6.3226zm1.0839-11.316c-0.99355 3.9613-7.0968 1.9484-9.0839 1.4581l1.7419-7.0065c1.9871 0.49032 8.3613 1.4194 7.329 5.5484z"
+              fill="#fff" />
+          </svg>
+          <span>
+            <input value="398FtBV94WoqCwUw1EggpPeSLmfoUkvGjd" readonly />
+            <span id="copybtc">📋</span>
+          </span>
+        </div>
+      </section>
     </main>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        document.getElementById('copybtc').addEventListener('click', (e) => {
+          navigator.clipboard.writeText(e.target.previousElementSibling.value);
+          e.target.textContent = '✅';
+          setTimeout(() => {
+            e.target.textContent = '📋';
+          }, 1000);
+        });
+      });
+    </script>
   </body>
 </html>
