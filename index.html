@@ -14,7 +14,7 @@
 
   <script src="https://cdn.jsdelivr.net/npm/timeago.js@4/dist/timeago.min.js"></script>
   <script src="https://cdn.jsdelivr.net/npm/bricks.js@1/dist/bricks.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/marked@15/lib/marked.umd.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/showdown@2/dist/showdown.min.js"></script>
   <script defer async src="https://kit.fontawesome.com/ca0b990bbd.js"></script>
   <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
 
@@ -333,7 +333,9 @@
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
       let intro = await fetch('https://raw.githubusercontent.com/leoherzog/leoherzog/main/README.md').then(response => response.text());
-      document.getElementById('introcontent').innerHTML = marked.parse(intro);
+      let converter = new showdown.Converter();
+      converter.setFlavor('github');
+      document.getElementById('introcontent').innerHTML = converter.makeHtml(intro);
       document.getElementById('intro').style.display = 'block';
     });
   </script>
