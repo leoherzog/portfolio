@@ -92,14 +92,18 @@
       text-align: center;
     }
 
-    #name {
-      width: 100%;
-      margin-top: 30vh;
+    #name,
+    #projects-title {
       font-family: 'Acme', ui-rounded, 'Hiragino Maru Gothic ProN', Quicksand, Comfortaa, Manjari, 'Arial Rounded MT', 'Arial Rounded MT Bold', Calibri, source-sans-pro, sans-serif;
-      font-size: 10vw;
       font-variant: small-caps;
       font-variant-alternates: normal;
       font-variant-caps: small-caps;
+    }
+
+    #name {
+      width: 100%;
+      margin-top: 30vh;
+      font-size: 10vw;
     }
 
     #accounts {
@@ -140,6 +144,49 @@
       padding: 0px 8px 12px;
     }
 
+    #projects-title {
+      margin: 7.5vh auto 2vh auto;
+      font-size: 3em;
+    }
+
+    #projects-legend {
+      margin-bottom: 2vh;
+    }
+
+    #projects-legend .badge {
+      border: 2px solid;
+      margin: 0 4px 8px 4px;
+    }
+
+    #projects {
+      width: 90vw;
+      margin: 0 auto;
+      display: grid;
+      /* Mirrors the Bricks columns of #posts, which step by the card's 20em inner width plus the gutter */
+      grid-template-columns: repeat(auto-fill, min(20em, 100%));
+      justify-content: center;
+      column-gap: 25px;
+    }
+
+    #projects .card {
+      /* Fits the card, its 2px borders and 0.5vw margins inside #projects on phones narrower than a card */
+      max-width: calc(90vw - 4px - 1vw);
+      scroll-margin-top: 2vh;
+      display: flex;
+      flex-direction: column;
+    }
+
+    #projects .card-body {
+      flex: 1;
+    }
+
+    #projects .card-body img {
+      display: block;
+      aspect-ratio: 2 / 1;
+      object-fit: cover;
+      margin-bottom: 12px;
+    }
+
     #posts {
       margin: 7.5vh auto 0 auto;
       width: 90vw;
@@ -148,12 +195,16 @@
       transition: .4s;
     }
 
+    .card,
+    #projects-legend {
+      font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
+    }
+
     .card {
       width: 20em;
       background: #282828;
       margin: 0 0.5vw 2vh 0.5vw;
       color: white;
-      font-family: Seravek, 'Gill Sans Nova', Ubuntu, Calibri, 'DejaVu Sans', source-sans-pro, sans-serif;
       font-weight: 400;
       border: 2px solid;
       border-color: #555;
@@ -235,6 +286,19 @@
         font-size: 2.5vw;
       }
     }
+
+    @media (min-width: 1550px) {
+      #projects {
+        column-gap: 40px;
+      }
+    }
+
+    /* #content is the page's scroller, so the legend links scroll it rather than the window */
+    @media (prefers-reduced-motion: no-preference) {
+      #content {
+        scroll-behavior: smooth;
+      }
+    }
   </style>
   
   <script defer src='https://static.cloudflareinsights.com/beacon.min.js' data-cf-beacon='{"token": "ee8e72367f2f4a2092d65362a55160f2"}'></script>
@@ -257,6 +321,9 @@
       </div>
       <div id="introcontent" class="card-body"></div>
     </div>
+    <div id="projects-title">Projects</div>
+    <div id="projects-legend"></div>
+    <div id="projects"></div>
     <div id="stream">
       <!-- <iframe id="twitch-embed" allowfullscreen></iframe> -->
       <!-- <iframe id="twitch-embed" src="https://player.twitch.tv/?channel=xd1936" allowfullscreen></iframe> -->
@@ -332,6 +399,87 @@
       }, 1000);
 
     }
+
+    const projectCategories = {
+      web: { label: 'Web', color: '#2a9d8f' },
+      weather: { label: 'Weather', color: '#3b82f6' },
+      games: { label: 'Games and Maps', color: '#e9c46a' },
+      hardware: { label: 'Hardware', color: '#e76f51' },
+      tools: { label: 'Tools', color: '#9b59b6' }
+    };
+
+    // Social preview card that GitHub generates for any public repo.
+    const githubCard = repo => 'https://opengraph.githubassets.com/1/leoherzog/' + repo;
+
+    // Link the live site when one exists, and GitHub only when it doesn't.
+    // Images are hardcoded because most sites block cross-origin reads of their og:image tags.
+    // Use the site's og:image, or githubCard() when the site has none.
+    const projects = [
+      { name: 'Torrent Parts', url: 'https://torrent.parts', icon: 'fa-solid fa-magnet', category: 'web', year: 2020, image: 'https://torrent.parts/img/TorrentParts-Social.png', text: 'Inspect and edit what’s inside a torrent file or magnet link.' },
+      { name: 'Stop Citing AI', url: 'https://stopcitingai.com', icon: 'fa-solid fa-robot', category: 'web', year: 2025, image: 'https://stopcitingai.com/social.png', text: 'A page to send back when someone says “But ChatGPT said…”' },
+      { name: 'Reprox', url: 'https://reprox.dev', icon: 'fa-solid fa-box-open', category: 'web', year: 2025, image: githubCard('reprox'), text: 'A serverless gateway that turns GitHub Releases into an APT or RPM repository.' },
+      { name: 'Parameter Page', url: 'https://parameter.page', icon: 'fa-solid fa-file-lines', category: 'web', year: 2022, image: 'https://parameter.page/img/parameterpage-social.png', text: 'A simple custom web page built entirely from URL query parameters.' },
+      { name: 'Webula', url: 'https://webula.herzog.tech', icon: 'fa-solid fa-rocket', category: 'web', year: 2026, image: githubCard('webula'), text: 'A static web client for the SpaceTraders API.' },
+      { name: 'Equalization Rocks!', url: 'https://equalization.rocks', icon: 'fa-solid fa-sliders', category: 'web', year: 2026, image: 'https://equalization.rocks/assets/og-image.png', text: 'An in-browser effects chain and multitrack mixer built on the Web Audio API.' },
+      { name: 'Spitball', url: 'https://spitball.show', icon: 'fa-solid fa-podcast', category: 'web', year: 2024, image: 'https://media.spitball.show/cover.webp', imageStyle: 'object-fit: contain', text: 'A podcast where three lovable scamps and a guest empty their heads of the startup and tech product ideas they have stuck up in there so you can have them for free. Anything we say is yours to keep!' },
+      { name: 'What is Private Browsing?', url: 'https://privatebrows.ing', icon: 'fa-solid fa-user-secret', category: 'web', year: 2023, image: githubCard('PrivateBrowsing'), text: 'Explains what an Incognito or private browsing window is, and how to use one.' },
+      { name: 'Do I Have JavaScript Enabled?', url: 'https://doihavejavascriptenabled.com', icon: 'fa-brands fa-js', category: 'web', year: 2022, image: githubCard('DoIHaveJavaScriptEnabled'), text: 'Tells you whether JavaScript is enabled in your browser.' },
+      { name: 'pwa.gripe', url: 'https://pwa.gripe', icon: 'fa-solid fa-mobile-screen-button', category: 'web', year: 2026, image: githubCard('pwa.gripe'), text: 'What Apple still won’t let web apps do on iPhone and iPad.' },
+      { name: 'By My Watch', url: 'https://bymy.watch', icon: 'fa-solid fa-clock', category: 'web', year: 2024, image: githubCard('bymywatch'), text: 'The many ways humans represent time, built on the Temporal API.' },
+      { name: 'The Go90 Scale', url: 'https://go90scaleofdoomedstreaming.services', icon: 'fa-solid fa-tv', category: 'web', year: 2023, image: 'https://go90scaleofdoomedstreaming.services/img/social.png', text: 'An interactive chart ranking how doomed each streaming service is.' },
+      { name: 'Swim Report', url: 'https://swim.report', icon: 'fa-solid fa-flag', category: 'weather', year: 2026, image: 'https://swim.report/og/unknown.png', text: 'Estimates beach hazard flag status for US and Canadian beaches, with a public API.' },
+      { name: 'Station Forwarder', url: 'https://github.com/leoherzog/WundergroundStationForwarder', icon: 'fa-solid fa-cloud-sun', category: 'weather', year: 2020, image: githubCard('WundergroundStationForwarder'), text: 'Apps Script that sends your weather station’s data to Wunderground, Windy, PWSWeather and more.' },
+      { name: 'weather.gripe', url: 'https://weather.gripe', icon: 'fa-solid fa-poo-storm', category: 'weather', year: 2026, image: githubCard('weather.gripe'), text: 'Shareable image cards for current conditions, forecasts and severe weather alerts.' },
+      { name: 'cwop.rest', url: 'https://cwop.rest', icon: 'fa-solid fa-temperature-half', category: 'weather', year: 2023, image: 'https://cwop.rest/img/social.png', text: 'An easy way to submit weather reports to NOAA’s Citizen Weather Observer Program.' },
+      { name: 'Seedless', url: 'https://tournament.thehopegang.com', icon: 'fa-solid fa-trophy', category: 'games', year: 2026, image: githubCard('seedless'), text: 'Peer-to-peer tournament brackets that sync between browsers with no server.' },
+      { name: 'The Wikiest Link', url: 'https://wikiestlink.spitball.show', icon: 'fa-solid fa-arrow-trend-up', category: 'games', year: 2026, image: 'https://wikiestlink.spitball.show/og-image.png', text: 'A Wikipedia pageviews game show with a host console and pop-out scoreboard.' },
+      { name: 'Trial and Era', url: 'https://trialandera.spitball.show', icon: 'fa-solid fa-timeline', category: 'games', year: 2026, image: 'https://trialandera.spitball.show/og.png', text: 'A timeline card game built from Wikipedia, with a host console and pop-out scoreboard.' },
+      { name: 'Hide + Seek Map Rater', url: 'https://jltg.herzog.tech', icon: 'fa-solid fa-train-subway', category: 'games', year: 2026, image: githubCard('jltg-hide-and-seek'), text: 'Scores whether a city’s transit feed works as a map for Jet Lag: The Game’s Hide and Seek.' },
+      { name: 'OpenRCT2 Map', url: 'https://leoherzog.github.io/openrct2-map/', icon: 'fa-solid fa-map-location-dot', category: 'games', year: 2026, image: githubCard('openrct2-map'), text: 'Turns any OpenRCT2 park save into a zoomable, pannable web map.' },
+      { name: 'VU1 Dials for Home Assistant', url: 'https://github.com/leoherzog/home-assistant-vu1-devices', icon: 'fa-solid fa-gauge-high', category: 'hardware', year: 2024, image: githubCard('home-assistant-vu1-devices'), text: 'A Home Assistant app and integration for Streacom’s VU1 e-ink analog dials.' },
+      { name: 'TRMNL Plugins', url: 'https://trmnl.com/recipes?user_id=2192', icon: 'fa-solid fa-tablet-screen-button', category: 'hardware', year: 2025, image: 'img/trmnl-sleeper.png', imageStyle: 'object-position: bottom', text: 'Plugins for the TRMNL e-ink dashboard, from severe weather alerts to podcast stats.' },
+      { name: 'NOAA Radar Watchface', url: 'https://apps.repebble.com/2029ab9c84f946e1b125f8e0', icon: 'fa-solid fa-satellite-dish', category: 'hardware', year: 2026, image: 'https://apps.repebble.com/og/2029ab9c84f946e1b125f8e0.png', text: 'A customizable PebbleOS watchface with live NOAA weather radar.' },
+      { name: 'Michigan Temp Map', url: 'https://github.com/leoherzog/michigan-temp-map', icon: 'fa-solid fa-temperature-high', category: 'hardware', year: 2023, image: githubCard('michigan-temp-map'), text: 'An ESP32 and LED map of live NWS station temperatures across Michigan.' },
+      { name: 'Calendar Traffic Light', url: 'https://github.com/leoherzog/calendar-traffic-light', icon: 'fa-solid fa-traffic-light', category: 'hardware', year: 2023, image: githubCard('calendar-traffic-light'), text: 'An ESP8266 traffic light that shows your current Google Calendar status.' },
+      { name: 'Marquee Letters', url: 'https://github.com/leoherzog/marquee', icon: 'fa-solid fa-font', category: 'hardware', year: 2026, image: githubCard('marquee'), text: 'Generates 3D-printable marquee letter shells from any font with OpenSCAD.' },
+      { name: 'Chronome', url: 'https://github.com/leoherzog/Chronome', icon: 'fa-solid fa-calendar-day', category: 'tools', year: 2023, image: githubCard('Chronome'), text: 'A GNOME Shell extension that shows your upcoming meetings and today’s agenda.' },
+      { name: 'BitBar Agenda', url: 'https://github.com/leoherzog/bitbar-agenda', icon: 'fa-solid fa-calendar-check', category: 'tools', year: 2021, image: githubCard('bitbar-agenda'), text: 'Your next meeting and today’s Google Calendar agenda in BitBar, xBar and Argos.' },
+      { name: 'hfox', url: 'https://github.com/leoherzog/hfox', icon: 'fa-solid fa-terminal', category: 'tools', year: 2026, image: githubCard('hfox'), text: 'A command-line interface for the HappyFox help desk API.' },
+      { name: 'HappyFox MCP', url: 'https://happyfox-mcp.herzog.workers.dev', icon: 'fa-solid fa-plug', category: 'tools', year: 2026, image: githubCard('happyfox-mcp'), text: 'An MCP server on Cloudflare Workers that lets AI agents work in HappyFox.' },
+      { name: 'Groupie', url: 'https://github.com/leoherzog/groupie', icon: 'fa-solid fa-users', category: 'tools', year: 2026, image: githubCard('groupie'), text: 'An admin toolbox for Google Groups that copies settings, duplicates groups and more.' }
+    ];
+
+    function fillInProjects() {
+      let legendString = '';
+      for (let [key, category] of Object.entries(projectCategories)) {
+        legendString += `<a class="badge" href="#projects-${key}" style="border-color:${category.color}">${category.label}</a>`;
+      }
+      document.getElementById('projects-legend').innerHTML = legendString;
+
+      let projectsString = '';
+      for (let project of projects) {
+        let url = new URL(project.url);
+        let onGithub = url.hostname === 'github.com';
+        let name = `<a href="${project.url}" target="_blank">${project.name}</a>`;
+        let link = `<span class="${onGithub ? 'fa-brands fa-github' : 'fa-regular fa-globe'} fa-fw"></span> <a href="${project.url}" target="_blank">${onGithub ? url.pathname.split('/')[2] : url.hostname}</a>`;
+        let image = `<a href="${project.url}" target="_blank"><img src="${project.image}" alt="" loading="lazy"${project.imageStyle ? ` style="${project.imageStyle}"` : ''}></a>`;
+        let id = project === projects.find(p => p.category === project.category) ? ` id="projects-${project.category}"` : '';
+        projectsString += `<div class="card"${id} style="border-color:${projectCategories[project.category].color}">
+          <div class="card-header">
+            <div class="card-header-left">${name}</div>
+            <div class="card-header-right"><span class="${project.icon} fa-fw"></span></div>
+          </div>
+          <div class="card-body">${image}${project.text}</div>
+          <div class="card-footer">
+            <div class="card-footer-left">${link}</div>
+            <div class="card-footer-right">${project.year}</div>
+          </div>
+        </div>`;
+      }
+      document.getElementById('projects').innerHTML = projectsString;
+    }
+
+    fillInProjects();
   </script>
   <script src="https://script.google.com/macros/s/AKfycbw3NQzIOVwU36GeDSlemT80h2lY2MRteejpUSDlg3waa7NPny4/exec?callback=load"></script>
   <script>
