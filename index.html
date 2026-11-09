@@ -476,7 +476,13 @@
           </div>
         </div>`;
       }
-      document.getElementById('projects').innerHTML = projectsString;
+      // Drop an image that fails to load, such as a GitHub card that came back 429.
+      // Error events don't bubble, so this listens in the capture phase.
+      const container = document.getElementById('projects');
+      container.addEventListener('error', e => {
+        if (e.target instanceof HTMLImageElement) e.target.closest('a').remove();
+      }, true);
+      container.innerHTML = projectsString;
     }
 
     fillInProjects();
