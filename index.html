@@ -5,17 +5,105 @@
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Futurist. ENFJ. Lover of new things. ☈">
+  <title>Leo Herzog</title>
+  <meta name="description" content="Futurist. ENFJ. Lover of new things. ☈ Web apps, weather tools, games and hardware projects by Leo Herzog.">
   <meta name="author" content="Leo Herzog">
-  <link rel="icon" type="image/x-icon" href="favicon.ico" />
+  <link rel="canonical" href="https://herzog.tech/">
+  <link rel="icon" href="/favicon.ico" sizes="16x16">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
   <link rel="me" href="https://mastodon.social/@herzog" />
 
-  <title>Lᴇᴏ Hᴇʀᴢᴏɢ</title>
+  <meta property="og:type" content="profile">
+  <meta property="og:site_name" content="Leo Herzog">
+  <meta property="og:title" content="Leo Herzog">
+  <meta property="og:description" content="Futurist. ENFJ. Lover of new things. ☈ Web apps, weather tools, games and hardware projects by Leo Herzog.">
+  <meta property="og:url" content="https://herzog.tech/">
+  <meta property="og:image" content="https://herzog.tech/img/og.png">
+  <meta property="og:image:width" content="1200">
+  <meta property="og:image:height" content="630">
+  <meta property="og:image:alt" content="Leo Herzog: Web, Weather, Games and Maps, Hardware and Tools projects at herzog.tech">
+  <meta property="og:locale" content="en_US">
+  <meta property="profile:first_name" content="Leo">
+  <meta property="profile:last_name" content="Herzog">
+  <meta property="profile:username" content="leoherzog">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="fediverse:creator" content="@herzog@mastodon.social">
 
-  <script src="https://cdn.jsdelivr.net/npm/timeago.js@4/dist/timeago.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/bricks.js@1/dist/bricks.min.js"></script>
-  <script src="https://cdn.jsdelivr.net/npm/showdown@2/dist/showdown.min.js"></script>
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "@id": "https://herzog.tech/#website",
+        "url": "https://herzog.tech/",
+        "name": "Leo Herzog",
+        "alternateName": "herzog.tech",
+        "inLanguage": "en",
+        "publisher": { "@id": "https://herzog.tech/#person" }
+      },
+      {
+        "@type": "ProfilePage",
+        "@id": "https://herzog.tech/#profilepage",
+        "url": "https://herzog.tech/",
+        "name": "Leo Herzog",
+        "isPartOf": { "@id": "https://herzog.tech/#website" },
+        "mainEntity": { "@id": "https://herzog.tech/#person" }
+      },
+      {
+        "@type": "Person",
+        "@id": "https://herzog.tech/#person",
+        "name": "Leo Herzog",
+        "givenName": "Leo",
+        "familyName": "Herzog",
+        "url": "https://herzog.tech/",
+        "image": "https://avatars.githubusercontent.com/u/5376265?v=4",
+        "description": "Futurist. ENFJ. Lover of new things.",
+        "jobTitle": "Software Manager: Emerging Technologies",
+        "worksFor": {
+          "@type": "CollegeOrUniversity",
+          "name": "Hope College",
+          "url": "https://hope.edu/"
+        },
+        "knowsAbout": [
+          "JavaScript",
+          "Google Apps Script",
+          "Python",
+          "Linux",
+          "Raspberry Pi",
+          "ESP32",
+          "Arduino",
+          "Decentralized web",
+          "Podcasting",
+          "Weather data",
+          "Amateur radio"
+        ],
+        "sameAs": [
+          "https://github.com/leoherzog",
+          "https://www.linkedin.com/in/leoherzog/",
+          "https://mastodon.social/@herzog",
+          "https://bsky.app/profile/herzog.tech",
+          "https://keybase.io/leoherzog",
+          "https://stackexchange.com/users/514773/xd1936",
+          "https://reddit.com/u/xd1936",
+          "https://news.ycombinator.com/user?id=xd1936",
+          "https://youtube.com/xd1936",
+          "https://manifold.markets/herzog",
+          "https://unsplash.com/@leoherzog",
+          "https://www.flickr.com/people/leoherzog/",
+          "https://www.openstreetmap.org/user/leoherzog",
+          "https://hope.edu/directory/people/herzog-leo/"
+        ]
+      }
+    ]
+  }
+  </script>
+
+  <script defer src="https://cdn.jsdelivr.net/npm/timeago.js@4/dist/timeago.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/bricks.js@1/dist/bricks.min.js"></script>
+  <script defer src="https://cdn.jsdelivr.net/npm/showdown@2/dist/showdown.min.js"></script>
   <script defer async src="https://kit.fontawesome.com/ca0b990bbd.js"></script>
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
   <link href="https://fonts.googleapis.com/css2?family=Acme&display=swap" rel="stylesheet">
 
   <style>
@@ -98,11 +186,12 @@
       font-variant: small-caps;
       font-variant-alternates: normal;
       font-variant-caps: small-caps;
+      font-weight: normal;
     }
 
     #name {
       width: 100%;
-      margin-top: 30vh;
+      margin: 30vh 0 0 0;
       font-size: 10vw;
     }
 
@@ -142,6 +231,12 @@
 
     #introcontent {
       padding: 0px 8px 12px;
+    }
+
+    /* The README's top heading renders as an h2 to keep a single h1, at the size an h1 had */
+    #introcontent h2 {
+      font-size: 2em;
+      margin-block: 0.67em;
     }
 
     #projects-title {
@@ -229,6 +324,11 @@
       align-items: center;
     }
 
+    .card-header h3 {
+      margin: 0;
+      font-size: inherit;
+    }
+
     .card-body {
       padding: 12px 8px;
       border-bottom: 1px #333 solid;
@@ -307,8 +407,8 @@
 
 <body>
 
-  <div id="content">
-    <div id="name">Leo Herzog</div>
+  <main id="content">
+    <h1 id="name">Leo Herzog</h1>
     <div id="accounts"><span class="fa-regular fa-at fa-2x fa-beat-fade"></span></div>
     <div id="intro" class="card">
       <div class="card-header">
@@ -321,7 +421,7 @@
       </div>
       <div id="introcontent" class="card-body"></div>
     </div>
-    <div id="projects-title">Projects</div>
+    <h2 id="projects-title">Projects</h2>
     <div id="projects-legend"></div>
     <div id="projects"></div>
     <div id="stream">
@@ -329,7 +429,7 @@
       <!-- <iframe id="twitch-embed" src="https://player.twitch.tv/?channel=xd1936" allowfullscreen></iframe> -->
     </div>
     <div id="posts"></div>
-  </div>
+  </main>
 
   <script>
     function load(info) {
@@ -460,9 +560,9 @@
       for (let project of projects) {
         let url = new URL(project.url);
         let onGithub = url.hostname === 'github.com';
-        let name = `<a href="${project.url}" target="_blank">${project.name}</a>`;
+        let name = `<h3><a href="${project.url}" target="_blank">${project.name}</a></h3>`;
         let link = `<span class="${onGithub ? 'fa-brands fa-github' : 'fa-regular fa-globe'} fa-fw"></span> <a href="${project.url}" target="_blank">${onGithub ? url.pathname.split('/')[2] : url.hostname}</a>`;
-        let image = `<a href="${project.url}" target="_blank"><img src="${project.image}" alt="" loading="lazy"${project.imageStyle ? ` style="${project.imageStyle}"` : ''}></a>`;
+        let image = `<a href="${project.url}" target="_blank"><img src="${project.image}" alt="${project.name}" loading="lazy"${project.imageStyle ? ` style="${project.imageStyle}"` : ''}></a>`;
         let id = project === projects.find(p => p.category === project.category) ? ` id="projects-${project.category}"` : '';
         projectsString += `<div class="card"${id} style="border-color:${projectCategories[project.category].color}">
           <div class="card-header">
@@ -483,15 +583,40 @@
         if (e.target instanceof HTMLImageElement) e.target.closest('a').remove();
       }, true);
       container.innerHTML = projectsString;
+
+      // Search engines that render JavaScript read the project list as structured data.
+      const itemList = document.createElement('script');
+      itemList.type = 'application/ld+json';
+      itemList.textContent = JSON.stringify({
+        '@context': 'https://schema.org',
+        '@type': 'ItemList',
+        name: 'Projects',
+        itemListElement: projects.map((project, i) => ({
+          '@type': 'ListItem',
+          position: i + 1,
+          item: {
+            '@type': 'CreativeWork',
+            name: project.name,
+            url: project.url,
+            description: project.text,
+            image: new URL(project.image, 'https://herzog.tech/').href,
+            dateCreated: String(project.year),
+            genre: projectCategories[project.category].label,
+            creator: { '@id': 'https://herzog.tech/#person' }
+          }
+        }))
+      });
+      document.head.append(itemList);
     }
 
     fillInProjects();
   </script>
-  <script src="https://script.google.com/macros/s/AKfycbw3NQzIOVwU36GeDSlemT80h2lY2MRteejpUSDlg3waa7NPny4/exec?callback=load"></script>
+  <!-- Deferred scripts run in document order, so this callback runs after timeago and Bricks load -->
+  <script defer src="https://script.google.com/macros/s/AKfycbw3NQzIOVwU36GeDSlemT80h2lY2MRteejpUSDlg3waa7NPny4/exec?callback=load"></script>
   <script>
     document.addEventListener('DOMContentLoaded', async function() {
       let intro = await fetch('https://raw.githubusercontent.com/leoherzog/leoherzog/main/README.md').then(response => response.text());
-      let converter = new showdown.Converter();
+      let converter = new showdown.Converter({ headerLevelStart: 2 });
       converter.setFlavor('github');
       document.getElementById('introcontent').innerHTML = converter.makeHtml(intro);
       document.getElementById('intro').style.display = 'block';
